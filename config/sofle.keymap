@@ -3,10 +3,10 @@
  * Goal: identical muscle memory for the 6x4 grid and primary layers
  *
  * Differences from Charybdis:
- *   - Thumb cluster: 5 keys per side (vs 3+2 / 2+1 on Charybdis)
- *   - Encoders: left=volume, right=page up/down (replaces trackball scroll)
- *   - No trackball: mouse click bindings on layer 1 right encoder + thumb
- *   - No RGB macros (no RGB on this Sofle)
+ *   - Thumb cluster: 5 keys per side (vs 3+2 / 2+1)
+ *   - Encoders: left=volume, right=scroll (replaces trackball layers 3/4/5)
+ *   - No trackball: mouse click bindings moved to layer 1 right thumb
+ *   - No RGB: macros simplified (no color switching)
  */
 
 #include <behaviors.dtsi>
@@ -27,37 +27,46 @@
         QWERTY {
             display-name = "BAS";
 
-            // Charybdis-identical 6x4 grid
-            // Thumb: GUI ALT CTRL [MO1] SPACE  |  ENTER [MO2] GUI ALT CTRL
-            // Encoders: left=volume, right=page scroll
             // ---------------------------------------------------------------------------------------------------------------
-            // | GRAVE |  1  |  2  |  3    |  4     |  5    |                       |  6    |  7  |  8     |  9   |  0    |  [    |
+            // | GRAVE |  1  |  2  |  3    |  4     |  5    |                       |  6    |  7  |  8     |  9   |  0    | [     |
             // | ESC   |  Q  |  W  |  E    |  R     |  T    |                       |  Y    |  U  |  I     |  O   |  P    | BKSP  |
-            // | TAB   |  A  |  S  |  D    |  F     |  G    |                       |  H    |  J  |  K     |  L   |  ;    |  '    |
+            // | TAB   |  A  |  S  |  D    |  F     |  G    |                       |  H    |  J  |  K     |  L   |  ;    | '     |
             // | SHIFT |  Z  |  X  |  C    |  V     |  B    | MUTE   |  |           |  N    |  M  |  ,     |  .   |  /    | ENTER |
-            //               | GUI | ALT   | CTRL   | MO1   | SPACE  |  | ENTER     | MO2   | GUI | ALT    | CTRL |
+            //               | GUI | ALT   | CTRL   | MO2   | SPACE  |  | ENTER     | MO3   | GUI | ALT    | CTRL |
 
             bindings = <
-&kp GRAVE       &kp N1  &kp N2    &kp N3    &kp N4     &kp N5                              &kp N6     &kp N7    &kp N8     &kp N9    &kp N0    &kp LEFT_BRACKET
-&kp ESC         &kp Q   &kp W     &kp E     &kp R      &kp T                               &kp Y      &kp U     &kp I      &kp O     &kp P     &kp BACKSPACE
-&kp TAB         &kp A   &kp S     &kp D     &kp F      &kp G                               &kp H      &kp J     &kp K      &kp L     &kp SEMI  &kp SQT
-&kp LEFT_SHIFT  &kp Z   &kp X     &kp C     &kp V      &kp B      &kp C_MUTE    &none      &kp N      &kp M     &kp COMMA  &kp DOT   &kp FSLH  &kp ENTER
-                        &mo 1     &kp LALT  &kp LGUI   &kp LCTRL  &mt LALT SPACE &kp LALT  &mo 1      &kp LGUI  &kp LCTRL  &mo 2
+&kp GRAVE       &kp N1  &kp N2  &kp N3        &kp N4     &kp N5                              &kp N6    &kp N7  &kp N8     &kp N9   &kp N0    &kp LEFT_BRACKET
+&kp ESC         &kp Q   &kp W   &kp E         &kp R      &kp T                               &kp Y     &kp U   &kp I      &kp O    &kp P     &kp BACKSPACE
+&kp TAB         &kp A   &kp S   &kp D         &kp F      &kp G                               &kp H     &kp J   &kp K      &kp L    &kp SEMI  &kp SQT
+&kp LEFT_SHIFT  &kp Z   &kp X   &kp C         &kp V      &kp B      &kp C_MUTE    &none      &kp N     &kp M   &kp COMMA  &kp DOT  &kp FSLH  &kp ENTER
+                        &kp LGUI  &kp LALT  &kp LCTRL  &mo 2      &mt LALT SPACE     &kp LALT  &mo 2     &kp LGUI  &kp LCTRL  &mo 3
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        };
+
+        GAME {
+            display-name = "GAME";
+
+            bindings = <
+&kp GRAVE       &kp N1  &kp N2  &kp N3        &kp N4     &kp N5                              &kp N6    &kp N7  &kp N8     &kp N9   &kp N0    &kp LEFT_BRACKET
+&kp ESC         &kp Q   &kp W   &kp E         &kp R      &kp T                               &kp Y     &kp U   &kp I      &kp O    &kp P     &kp BACKSPACE
+&kp TAB         &kp A   &kp S   &kp D         &kp F      &kp G                               &kp H     &kp J   &kp K      &kp L    &kp SEMI  &kp SQT
+&kp LEFT_SHIFT  &kp Z   &kp X   &kp C         &kp V      &kp B      &kp C_MUTE    &none      &kp N     &kp M   &kp COMMA  &kp DOT  &kp FSLH  &kp ENTER
+                        &kp LGUI  &kp LALT  &kp LCTRL  &mo 2      &kp SPACE          &kp LALT  &mo 2     &kp LGUI  &kp LCTRL  &mo 3
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
         F_layers {
-            display-name = "FN";
+            display-name = "LOW";
 
-            // Charybdis layer 1 — F-keys + right-side numpad + brackets
-            // Right encoder key = mouse left click (replaces trackball click)
             // ---------------------------------------------------------------------------------------------------------------
             // | F1    | F2    | F3    | F4   | F5          | F6            |                 | F7             | F8   | F9   | F10  | F11   | F12   |
             // |       |       |       |      |             |               |                 | MB2            | 7    | 8    | 9    | -     | =     |
             // | TAB   |       |       |      | \           | {             |                 | }              | 4    | 5    | 6    | RIGHT |       |
-            // | SHIFT | =     | -     | +    | {           | [             |        |  | MB1 | ]              | 1    | 2    | 3    | |     |       |
+            // | SHIFT | =     | -     | +    | {           | [             |        |  |     | ]              | 1    | 2    | 3    | |     |       |
             //                 |       |      |             | _to0_         |        |  | MB1 | 0              |      |      |      |
 
             bindings = <
@@ -65,28 +74,27 @@
 &trans     &none      &none      &none     &none           &trans                                  &mkp MB2           &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp MINUS  &kp EQUAL
 &kp TAB    &none      &none      &none     &kp BACKSLASH   &kp LEFT_BRACE                          &kp RIGHT_BRACE    &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp RIGHT  &trans
 &kp LSHFT  &kp EQUAL  &kp MINUS  &kp PLUS  &kp LEFT_BRACE  &kp LEFT_BRACKET  &trans    &mkp LCLK  &kp RIGHT_BRACKET  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp PIPE   &trans
-                      &to 0      &trans    &trans          &trans             &trans    &mkp LCLK  &kp NUMBER_0       &trans        &trans        &trans
+                       &trans     &trans    &trans          &to 0              &trans    &mkp LCLK  &kp NUMBER_0       &trans        &trans        &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
         BT_layers {
-            display-name = "BT";
+            display-name = "RAI";
 
-            // Charybdis layer 2 — BT selection + arrow keys
             // ---------------------------------------------------------------------------------------------------------------
             // |       | BT1          | BT2   | BT3    | BT4   | BT5   |                 |        |       |       |       |       |       |
             // |       |              |       |        |       |       |                 |        |       | UP    |       |       |       |
             // |       | BT_CLR_ALL   |       |        |       |       |                 |        | LEFT  | DOWN  | RIGHT |       |       |
-            // |       |              |       | BT_CLR |       |       |        |  |     | BT_NXT |       |       |       |       |       |
+            // | TOG 1 |              |       | BT_CLR |       |       |        |  |     | BT_NXT |       |       |       |       |       |
             //                        |       |        |       |       |        |  |     |        |       |       |       |
 
             bindings = <
 &trans  &bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                    &trans      &trans          &trans          &trans           &trans  &trans
 &trans  &trans          &trans        &trans        &trans        &trans                          &trans      &trans          &kp UP_ARROW    &trans           &trans  &trans
 &trans  &bt BT_CLR_ALL  &trans        &trans        &trans        &trans                          &trans      &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans  &trans
-&trans  &trans          &trans        &bt BT_CLR    &trans        &trans          &trans    &trans  &bt BT_NXT  &trans          &trans          &trans           &trans  &trans
+&tog 1  &trans          &trans        &bt BT_CLR    &trans        &trans          &trans    &trans  &bt BT_NXT  &trans          &trans          &trans           &trans  &trans
                         &trans        &trans        &trans        &trans          &trans    &trans  &trans      &trans          &trans          &trans
             >;
 
