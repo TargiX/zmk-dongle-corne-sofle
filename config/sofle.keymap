@@ -42,7 +42,7 @@
                         &mo 1     &kp LALT  &kp LGUI   &kp LCTRL  &mt LALT SPACE     &kp LALT  &mo 3     &mo 2     &kp LCTRL  &kp LGUI
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp PG_UP PG_DN>;
         };
 
         GAME {
@@ -56,7 +56,7 @@
                         &mo 1     &kp LALT  &kp LGUI   &kp LCTRL  &kp SPACE          &kp LALT       &mo 3  &mo 2  &kp LCTRL  &kp LGUI 
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp PG_UP PG_DN>;
         };
 
         F_layers {
@@ -77,7 +77,7 @@
                        &trans     &trans    &trans          &to 0              &trans    &mkp LCLK  &kp NUMBER_0       &trans        &trans        &trans
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp PG_UP PG_DN>;
         };
 
         BT_layers {
@@ -98,7 +98,7 @@
                         &trans        &trans        &trans        &trans          &trans    &trans  &trans      &trans          &trans          &trans
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp PG_UP PG_DN>;
         };
     };
 };
